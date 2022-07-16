@@ -22,7 +22,8 @@ public:
     ValidationResults validate(ValidationContext validationContext, ValidationResults validationResults){
         printf("Validating SDC value: %s\n", validationContext.getStructInput().sdc.c_str());
         if(validationUtil.isDouble(validationContext.getStructInput().sdc)){
-            int sdcValue = stoi(validationContext.getStructInput().sdc);
+            double sdcValue = stod(validationContext.getStructInput().sdc);
+            printf("SDC num value: %d\n", sdcValue);
             if(!sdcWithinRange(sdcValue)){
                 validationResults.setSdcValid(false);
                 validationResults.setSdcNotValidMessage("SDC not within acceptable range");
@@ -37,7 +38,7 @@ public:
         return validationResults;
     };
 
-    bool sdcWithinRange(int value){
+    bool sdcWithinRange(double value){
         return value <=40.05 && value > 0;
     }
 };

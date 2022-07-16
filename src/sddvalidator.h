@@ -22,7 +22,7 @@ public:
     ValidationResults validate(ValidationContext validationContext, ValidationResults validationResults){
         printf("Validating SDD value: %s\n", validationContext.getStructInput().sdd.c_str());
         if(validationUtil.isDouble(validationContext.getStructInput().sdd)){
-            int sddValue = stoi(validationContext.getStructInput().sdd);
+            double sddValue = stod(validationContext.getStructInput().sdd);
             if(!sddWithinRange(sddValue)){
                 validationResults.setSddValid(false);
                 validationResults.setSddNotValidMessage("SDD not within acceptable range");
@@ -37,7 +37,7 @@ public:
         return validationResults;
     };
 
-    bool sddWithinRange(int value){
+    bool sddWithinRange(double value){
         return value <=20.65 && value > 0;
     }
 };
